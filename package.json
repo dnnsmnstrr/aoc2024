@@ -1,0 +1,27 @@
+{
+  "name": "aoc2024",
+  "version": "1.0.0",
+  "description": "Advent of Code 2024 - solutions",
+  "type": "module",
+  "scripts": {
+    "start": "aocrunner day",
+    "build": "aocrunner build",
+    "test": "vitest",
+    "format": "prettier -w src",
+    "update:readme": "aocrunner update:readme"
+  },
+  "keywords": [
+    "aoc"
+  ],
+  "author": "Dennis Muensterer",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^22.10.1",
+    "aocrunner": "^1.9.6",
+    "prettier": "^2.8.0",
+    "vitest": "^2.1.6"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
