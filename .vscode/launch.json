@@ -1,0 +1,21 @@
+{
+  "configurations": [
+    {
+      "name": "Advent of Code Runner: Start",
+      "type": "node",
+      "request": "launch",
+      "trace": true,
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["start", "${input:day}"],
+      "console": "integratedTerminal"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "day",
+      "type": "promptString",
+      "description": "Enter the day number",
+      "default": "1"
+    }
+  ]
+}
