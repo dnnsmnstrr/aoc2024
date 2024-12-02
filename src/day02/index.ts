@@ -26,9 +26,7 @@ function validateReport(report: number[]) {
 
 function mapper(line: string) {
   const report = line.split(' ').map(Number)
-  console.log(report)
   const isSafe = validateReport(report)
-  console.log(isSafe)
   return {
     report,
     isSafe
@@ -44,10 +42,9 @@ const part1 = (rawInput) => {
 function validateReportWithDampener(report: number[]) {
   let isSafe = validateReport(report)
   if (!isSafe) {
-    report.forEach((element, index) => {
+    report.forEach((_, index) => {
       const dampenedReport = report.slice(0, index).concat(report.slice(index + 1))
       const isSafeWhenDampened = validateReport(dampenedReport)
-      console.log('dampened', dampenedReport, isSafeWhenDampened)
       if (isSafeWhenDampened) {
         isSafe = true
       }
