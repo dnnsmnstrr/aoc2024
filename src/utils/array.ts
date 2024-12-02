@@ -61,3 +61,7 @@ export function countOccurrences<T>(array: Array<T>, element: T): number {
   return array.reduce((count, current) => (current === element ? count + 1 : count), 0)
 }
 
+export function countOccurrencesWhere<T>(array: Array<T>, callback: (element: T) => boolean ): number {
+  return array.reduce((count, current) => (callback(current) ? count + 1 : count), 0)
+}
+
