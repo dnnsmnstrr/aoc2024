@@ -7,6 +7,8 @@
 
 # 🎄 Advent of Code 2024 🎄
 
+This year I will try to generate an image for every day I solve. Let's see how far I make it ⭐
+
 ## Solutions
 
 <!--SOLUTIONS-->
@@ -252,3 +254,8 @@ Total time: 13.521ms
 ---
 
 ✨🎄🎁🎄🎅🎄🎁🎄✨
+
+### Links
+
+- [Solutions Calendar](https://old.reddit.com/r/adventofcode/wiki/archives/solution_megathreads/2024)
+- [GIF Collection](https://solhsa.com/aoc/)
