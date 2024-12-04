@@ -85,9 +85,9 @@ Both parts: 2.638ms
 
 ```
 Day 03
-Time part 1: -
+Time part 1: 0.49ms
 Time part 2: 0.38ms
-Both parts: 0.38ms
+Both parts: 0.87ms
 ```
 
 ```
