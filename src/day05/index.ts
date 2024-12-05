@@ -5,9 +5,19 @@ function mapper(line: string) {
   return line.split('\n').map(pageRule => pageRule.split(pageRule.includes(',') ? ',' : '|').map(Number))
 }
 
-const part1 = (rawInput) => {
-  const [orderingRules, pagesUpdates] = splitLines(rawInput, { mapper, delimiter: '\n\n' })
-  const ruleMap = orderingRules.reduce((acc, currentRule) => {
+type RuleBook = Record<number, number[]>
+
+function checkRightOrder(updates: number[], ruleBook: RuleBook) {
+  const firstUpdate = updates[0];
+  const restUpdates = updates.slice(1);
+  const isRightOrder = restUpdates.every((update) => {
+    return ruleBook[firstUpdate] && ruleBook[firstUpdate].includes(update)
+  })
+  return isRightOrder
+}
+
+function createRuleBook(rules: number[][]) {
+  const ruleBook = rules.reduce((acc, currentRule) => {
     if (acc[currentRule[0]]) {
       acc[currentRule[0]].push(currentRule[1])
     } else {
@@ -15,17 +25,16 @@ const part1 = (rawInput) => {
     }
     return acc
   }, {})
-  // console.log(ruleMap)
+  return ruleBook
+}
+
+const part1 = (rawInput) => {
+  const [orderingRules, pagesUpdates] = splitLines(rawInput, { mapper, delimiter: '\n\n' })
+  const ruleBook = createRuleBook(orderingRules)
   const filteredUpdates = pagesUpdates.filter(updates => {
     let isUpdateCorrect = true
     for (let index = 0; index < updates.length; index++) {
-      const element = updates[index];
-      const restUpdates = updates.slice(index + 1);
-      const isRightOrder = restUpdates.every((update) => {
-        
-        return ruleMap[element] && ruleMap[element].includes(update)
-      })
-      if (!isRightOrder) isUpdateCorrect = false
+      if (!checkRightOrder(updates.slice(index), ruleBook)) isUpdateCorrect = false
     }
     return isUpdateCorrect
   })
@@ -38,52 +47,46 @@ const part1 = (rawInput) => {
   return String(result)
 }
 
+const insert = (arr: number[], index: number, newItem: number) => [
+  ...arr.slice(0, index),
+  newItem,
+  ...arr.slice(index),
+];
+
 const part2 = (rawInput) => {
   const [orderingRules, pagesUpdates] = splitLines(rawInput, { mapper, delimiter: '\n\n' })
 
-  const ruleMap = orderingRules.reduce((acc, currentRule) => {
-    if (acc[currentRule[0]]) {
-      acc[currentRule[0]].push(currentRule[1])
-    } else {
-      acc[currentRule[0]] = [currentRule[1]]
-    }
-    return acc
-  }, {})
+  const ruleBook = createRuleBook(orderingRules)
 
-  const filteredUpdates = pagesUpdates.filter(updates => {
+  const invalidUpdates = pagesUpdates.filter(updates => {
     let isUpdateCorrect = true
     for (let index = 0; index < updates.length; index++) {
-      const element = updates[index];
-      const restUpdates = updates.slice(index + 1);
-      const isRightOrder = restUpdates.every((update) => {
-        return ruleMap[element] && ruleMap[element].includes(update)
-      })
-      if (!isRightOrder) isUpdateCorrect = false
+      if (!checkRightOrder(updates.slice(index), ruleBook)) isUpdateCorrect = false
     }
     return !isUpdateCorrect // get the incorrectly-ordered updates
   })
 
-  const middleNumbers = filteredUpdates.map((update) => {
-    const updateRules = []
-    for (let i = 0; i < update.length; i++) {
-      if (update[i] && ruleMap[update[i]]) {
-        updateRules.push({
-          update: update[i],
-          rules: ruleMap[update[i]],
-          ruleCount: ruleMap[update[i]].length
-        })
+  
+  let fixedLines = [];
+  // stole this from https://github.com/Trifall/advent-of-code-2024/blob/main/src/day5/day5.ts
+  for (let update of invalidUpdates) {
+    let values = update;
+    for (let i = 0; i < values.length; i++) {
+      for (let j = i + 1; j < values.length; j++) {
+        if (ruleBook[values[j]]?.includes(values[i])) {
+          values = insert(values, i, values.splice(j, 1)[0]);
+        }
       }
     }
-    const sortedUpdateRules = updateRules.sort((a, b) => b.ruleCount - a.ruleCount)
-    const offset = sortedUpdateRules[sortedUpdateRules.length - 1].rules.some(rule => update.includes(rule)) ? 1 : 0
-    const middleIndex = Math.floor((sortedUpdateRules.length + offset) / 2)
-    console.log(update, sortedUpdateRules, offset, middleIndex)
-    return sortedUpdateRules[middleIndex].update
+    fixedLines.push(values);
+  }
+  
+  const middleNumbers = fixedLines.map((update) => {
+    const middleIndex = Math.floor(update.length / 2)
+    return update[middleIndex]
   })
-  console.log(middleNumbers)
 
-  const result = add(...middleNumbers)
-  return String(result)
+  return String(add(...middleNumbers))
 }
 
 const exampleInput = `
