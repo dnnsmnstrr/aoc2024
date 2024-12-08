@@ -19,7 +19,7 @@ This year I will try to generate an image for every day I solve. Let's see how f
 [![Day](https://badgen.net/badge/04/%E2%98%85%E2%98%85/green)](src/day04)
 [![Day](https://badgen.net/badge/05/%E2%98%85%E2%98%85/green)](src/day05)
 [![Day](https://badgen.net/badge/06/%E2%98%85%E2%98%85/green)](src/day06)
-![Day](https://badgen.net/badge/07/%E2%98%86%E2%98%86/gray)
+[![Day](https://badgen.net/badge/07/%E2%98%85%E2%98%86/yellow)](src/day07)
 ![Day](https://badgen.net/badge/08/%E2%98%86%E2%98%86/gray)
 ![Day](https://badgen.net/badge/09/%E2%98%86%E2%98%86/gray)
 ![Day](https://badgen.net/badge/10/%E2%98%86%E2%98%86/gray)
@@ -106,16 +106,16 @@ Both parts: 2.779ms
 
 ```
 Day 06
-Time part 1: 1.739ms
-Time part 2: 3589.615ms
-Both parts: 3591.354ms
+Time part 1: 1.733ms
+Time part 2: 3328.258ms
+Both parts: 3329.991ms
 ```
 
 ```
 Day 07
-Time part 1: -
+Time part 1: 283.737ms
 Time part 2: -
-Both parts: -
+Both parts: 283.737ms
 ```
 
 ```
@@ -245,8 +245,8 @@ Both parts: -
 ```
 
 ```
-Total stars: 12/50
-Total time: 3608.126ms
+Total stars: 13/50
+Total time: 3630.5ms
 ```
 
 <!--/RESULTS-->
