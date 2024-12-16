@@ -1,7 +1,5 @@
 // String helpers
 
-import { parse } from "path";
-
 export const splitInHalf = (value: string) => {
   if (!value || !value.length) return ['', '']
   if (value.length === 1) return [value, '']

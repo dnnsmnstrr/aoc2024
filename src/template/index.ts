@@ -5,14 +5,14 @@ function mapper(line: string) {
   return line
 }
 
-const part1 = (rawInput) => {
+const part1 = (rawInput: string) => {
   const input = splitLines(rawInput, { mapper })
 
   const result = ''
   return String(result)
 }
 
-const part2 = (rawInput) => {
+const part2 = (rawInput: string) => {
   const input = splitLines(rawInput, { mapper })
 
   const result = ''
